@@ -1,0 +1,1 @@
+export const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://reclutador1:DXEncGwDONqtwrDx@cluster0.5umudaq.mongodb.net/APIUsers?retryWrites=true&w=majority";
