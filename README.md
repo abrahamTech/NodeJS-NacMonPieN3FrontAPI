@@ -43,7 +43,7 @@ Desde la carpeta principal (`src`), ejecuta el siguiente comando para iniciar el
 npm run dev
 ```
 
-El servidor estará disponible en `http://localhost:3000` por defecto.
+El servidor estará disponible en `http://localhost:4000` por defecto.
 
 ### Frontend
 Desde la carpeta del cliente (`client`), ejecuta el siguiente comando para iniciar la aplicación frontend:
@@ -51,4 +51,4 @@ Desde la carpeta del cliente (`client`), ejecuta el siguiente comando para inici
 ```bash
 npm run dev
 ```
-La aplicación frontend estará disponible en `http://localhost:8080` por defecto.
+La aplicación frontend estará disponible en `http://localhost:3000` por defecto.

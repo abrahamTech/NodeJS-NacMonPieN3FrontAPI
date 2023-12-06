@@ -2,7 +2,7 @@ import app from "./app.js";
 import { connectDB } from "./db.js";
 
 //Settings
-app.set("port", 3000);
+app.set("port", 4000);
 
 
 connectDB();
