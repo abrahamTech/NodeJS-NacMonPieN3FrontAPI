@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 export default function SignInForm() {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { signup, user, isAuthenticated } = useAuth();
 
     useEffect(() => {
@@ -20,11 +20,12 @@ export default function SignInForm() {
 
     console.log("Register: ");
     console.log(user);
+    console.log(errors);
 
     // const [username, setUsername] = useState("");
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
     // const handleSubmit2 = async (e) => {
     //     e.preventDefault();
@@ -62,9 +63,15 @@ export default function SignInForm() {
                             id="userName"
                             className="inputLogin"
                             // onChange={e => setUsername(e.target.value)}
-                            {...register("username")}
+                            {...register("username", { required: "Ingresa un nombre de usuario" })}
                         />
                     </div>
+
+                    {errors.username && (
+                        <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mt-[-10px]">
+                            {errors.username.message}
+                        </div>
+                    )}
 
                     <div className="flex flex-col">
                         <label htmlFor="userEmail" >Email</label>
@@ -74,9 +81,15 @@ export default function SignInForm() {
                             id="userEmail"
                             className="inputLogin"
                             // onChange={e => setEmail(e.target.value)}
-                            {...register("email")}
+                            {...register("email", { required: "Ingresa un email" })}
                         />
                     </div>
+
+                    {errors.email && (
+                        <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mt-[-10px]">
+                            {errors.email.message}
+                        </div>
+                    )}
 
                     <div className="flex flex-col">
                         <label htmlFor="userPassword" >Password</label>
@@ -86,17 +99,18 @@ export default function SignInForm() {
                             id="userPassword"
                             className="inputLogin"
                             // onChange={e => setPassword(e.target.value)}
-                            {...register("password")}
+                            {...register("password", { required: "Ingresa una contraseña" })}
                         />
                     </div>
 
-                    <button className="btn-primary">Register</button>
-
-                    {error && (
-                        <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                            Error message: {error}
+                    {errors.password && (
+                        <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mt-[-10px] mb-2">
+                            {errors.password.message}
                         </div>
                     )}
+
+                    <button className="btn-primary">Register</button>
+
                     
                     <div className="text-sm mt-3 text-right">
                         Already have an acount? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
