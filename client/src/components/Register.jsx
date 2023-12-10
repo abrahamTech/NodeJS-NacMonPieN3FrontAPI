@@ -1,30 +1,50 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerRequest } from "@/app/api/auth";
+import { useForm } from "react-hook-form";
+import { useAuth } from "@/context/authContext";
+import { redirect } from "next/navigation";
 
 export default function SignInForm() {
 
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const { register, handleSubmit } = useForm();
+    const { signup, user, isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        if(isAuthenticated) {
+            redirect("/loans");
+        }
+    }, [isAuthenticated]);
+
+    console.log("Register: ");
+    console.log(user);
+
+    // const [username, setUsername] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit2 = async (e) => {
+    //     e.preventDefault();
 
-        if(!username || !email || !password) {
-            setError("Todos los campos son necesarios");
-            return;
-        }
+    //     if(!username || !email || !password) {
+    //         setError("Todos los campos son necesarios");
+    //         return;
+    //     }
 
-        const values = {
-            email, password, username
-        }
+    //     const values = {
+    //         email, password, username
+    //     }
 
-        const res = await registerRequest(values)
-    };
+    //     const res = await registerRequest(values)
+    // };
+
+    const onSubmit = async (values) => {
+        await signup(values);
+    }
+
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -32,7 +52,7 @@ export default function SignInForm() {
                 
                 <h1 className="text-xl font-bold my-4">Register</h1>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
 
                     <div className="flex flex-col">
                         <label htmlFor="userName" >User Name</label>
@@ -41,7 +61,8 @@ export default function SignInForm() {
                             placeholder="StephenCruise01" 
                             id="userName"
                             className="inputLogin"
-                            onChange={e => setUsername(e.target.value)}
+                            // onChange={e => setUsername(e.target.value)}
+                            {...register("username")}
                         />
                     </div>
 
@@ -52,7 +73,8 @@ export default function SignInForm() {
                             placeholder="iamalbert@gmail.com" 
                             id="userEmail"
                             className="inputLogin"
-                            onChange={e => setEmail(e.target.value)}
+                            // onChange={e => setEmail(e.target.value)}
+                            {...register("email")}
                         />
                     </div>
 
@@ -63,7 +85,8 @@ export default function SignInForm() {
                             placeholder="********" 
                             id="userPassword"
                             className="inputLogin"
-                            onChange={e => setPassword(e.target.value)}
+                            // onChange={e => setPassword(e.target.value)}
+                            {...register("password")}
                         />
                     </div>
 
