@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 export default function SignInForm() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signup, user, isAuthenticated } = useAuth();
+    const { signup, user, isAuthenticated, errors: registerErrors } = useAuth();
 
     useEffect(() => {
         if(isAuthenticated) {
@@ -21,26 +21,6 @@ export default function SignInForm() {
     console.log("Register: ");
     console.log(user);
     console.log(errors);
-
-    // const [username, setUsername] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [error, setError] = useState("");
-
-    // const handleSubmit2 = async (e) => {
-    //     e.preventDefault();
-
-    //     if(!username || !email || !password) {
-    //         setError("Todos los campos son necesarios");
-    //         return;
-    //     }
-
-    //     const values = {
-    //         email, password, username
-    //     }
-
-    //     const res = await registerRequest(values)
-    // };
 
     const onSubmit = async (values) => {
         await signup(values);
@@ -111,6 +91,13 @@ export default function SignInForm() {
 
                     <button className="btn-primary">Register</button>
 
+                    {
+                        registerErrors.map((error, i) => (
+                            <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mt-[-10px] mb-2" key={i}>
+                                {error}
+                            </div>
+                        ))
+                    }
                     
                     <div className="text-sm mt-3 text-right">
                         Already have an acount? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
