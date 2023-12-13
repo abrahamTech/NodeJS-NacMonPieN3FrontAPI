@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-import { registerRequest } from "@/app/api/auth";
+import { registerRequest, loginRequest } from "@/app/api/auth";
 
 const AuthContext = createContext();
 
@@ -22,23 +22,32 @@ export const AuthProvider = ({ children }) => {
     const [errors, setErrors] = useState([]);
 
     const signup = async (user) => {
-        try {
-          const res = await registerRequest(user);
-          console.log("authContext: ");
-          console.log(res.data);
-          if (res.status === 200) {
-            setUser(res.data);
-            setIsAuthenticated(true);
-          }
-        } catch (error) {
-            console.log(error.response);
-            setErrors(error.response.data.message);
+      try {
+        const res = await registerRequest(user);
+        console.log("authContext: ");
+        console.log(res.data);
+        if (res.status === 200) {
+          setUser(res.data);
+          setIsAuthenticated(true);
         }
-      };
+      } catch (error) {
+        console.log(error.response);
+        setErrors(error.response.data.message);
+      }
+    };
 
-      return (
-        <AuthContext.Provider value={{ signup, user, isAuthenticated, errors }}>
-          {children}
-        </AuthContext.Provider>
-      );
+    const signin = async (user) => {
+      try {
+        const res = await loginRequest(user);
+        console.log(res);
+      } catch (error) {
+        setErrors(error.response.data.message);
+      }
+    }
+
+    return (
+      <AuthContext.Provider value={{ signup, signin, user, isAuthenticated, errors }}>
+        {children}
+      </AuthContext.Provider>
+    );
 }

@@ -8,10 +8,10 @@ import Link from "next/link";
 export default function LogIn() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { errors: loginErrors } = useAuth(); 
+    const { signin, errors: loginErrors } = useAuth(); 
 
     const onSubmit = async (values) => {
-        console.log(values);
+        await signin(values);
     }
 
     return (
@@ -60,13 +60,15 @@ export default function LogIn() {
 
                     <button className="btn-primary">Register</button>
 
-                    {
-                        loginErrors.map((error, i) => (
-                            <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mt-[-10px] mb-2" key={i}>
-                                {error}
-                            </div>
-                        ))
-                    }
+                    <div className="mt-3">
+                        {
+                            loginErrors.map((error, i) => (
+                                <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mb-2" key={i}>
+                                    {error}
+                                </div>
+                            ))
+                        }
+                    </div>
                     
                     <div className="text-sm mt-3 text-right">
                         ¿No tienes una cuenta? <Link href={"/register"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Registrarse</Link>
