@@ -100,7 +100,7 @@ export default function SignInForm() {
                     }
                     
                     <div className="text-sm mt-3 text-right">
-                        Already have an acount? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
+                        ¿Ya tienes una cuenta? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
                     </div>
 
                 </form>
