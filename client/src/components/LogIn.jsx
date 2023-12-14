@@ -4,15 +4,23 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/authContext";
 
 import Link from "next/link";
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 
 export default function LogIn() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signin, errors: loginErrors } = useAuth(); 
+    const { signin, errors: loginErrors, isAuthenticated } = useAuth(); 
 
     const onSubmit = async (values) => {
         await signin(values);
     }
+
+    useEffect( () => {
+        if(isAuthenticated) {
+            redirect("/loans");
+        }
+    }, [isAuthenticated]);
 
     return (
         <div className="flex">
@@ -58,23 +66,23 @@ export default function LogIn() {
                         </div>
                     )}
 
-                    <button className="btn-primary">Register</button>
-
-                    <div className="mt-3">
-                        {
-                            loginErrors.map((error, i) => (
-                                <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mb-2" key={i}>
-                                    {error}
-                                </div>
-                            ))
-                        }
-                    </div>
-                    
-                    <div className="text-sm mt-3 text-right">
-                        ¿No tienes una cuenta? <Link href={"/register"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Registrarse</Link>
-                    </div>
+                    <button className="btn-primary">Login</button>
 
                 </form>
+
+                <div className="mt-3">
+                    {
+                        loginErrors.map((error, i) => (
+                            <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mb-2" key={i}>
+                                {error}
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div className="text-sm mt-4 text-right">
+                    ¿No tienes una cuenta? <Link href={"/register"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Registrarse</Link>
+                </div>
             </div>
         </div>
     )

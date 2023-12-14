@@ -91,21 +91,22 @@ export default function SignInForm() {
 
                     <button className="btn-primary">Register</button>
 
-                    <div className="mt-3">
-                        {
-                            registerErrors.map((error, i) => (
-                                <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mb-2" key={i}>
-                                    {error}
-                                </div>
-                            ))
-                        }
-                    </div>
-                    
-                    <div className="text-sm mt-3 text-right">
-                        ¿Ya tienes una cuenta? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
-                    </div>
-
                 </form>
+
+                <div className="mt-3">
+                    {
+                        registerErrors.map((error, i) => (
+                            <div className="bg-red-700 text-white w-fit text-sm py-1 px-3 rounded-md mb-2" key={i}>
+                                {error}
+                            </div>
+                        ))
+                    }
+                </div>
+                    
+                <div className="text-sm mt-4 text-right">
+                    ¿Ya tienes una cuenta? <Link href={"/login"} className="bg-gradient-to-r from-red-500 to-red-700 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
+                </div>
+
             </div>
 
         </div>
