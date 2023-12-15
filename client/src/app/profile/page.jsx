@@ -1,11 +1,14 @@
 import ProfileComp from "@/components/ProfileComp";
+import ProtectedRoute from "@/routes";
 
 function Profile() {
   return (
-    <div>
-        Profile
-        <ProfileComp />
-    </div>
+    <ProtectedRoute>
+        <div>
+            Profile
+            <ProfileComp />
+        </div>
+    </ProtectedRoute>
   )
 }
 

@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         const res = await loginRequest(user);
         if(res.status === 201) {
           console.log(res);
-          setUser(user);
+          setUser(res.data);
           setIsAuthenticated(true);
         }
       } catch (error) {
