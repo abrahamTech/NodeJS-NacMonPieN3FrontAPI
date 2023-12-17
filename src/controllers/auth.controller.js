@@ -78,6 +78,24 @@ export const login = async (req, res) => {
     }
 };
 
+export const verifyToken = async (req, res) => {
+    const { token } = req.cookies;
+
+    if(!token) return res.status(401).json({ mesagge: "Unauthorized" });
+
+    jwt.verify(token, SECRET_KEY, async (err, user) => {
+        if(err) return res.status(401).json({ mesagge: "Unauthorized" });
+        
+        const userFound = await User.findById(user.id);
+        if(!userFound) return res.status(401).json({ mesagge: "Unauthorized" });
+
+        return res.json({
+            id:userFound._id,
+            username: userFound.username,
+            email: userFound.email,
+        });
+    });
+};
 
 export const logout = async (req, res) => {
     res.cookie("token", "", {
