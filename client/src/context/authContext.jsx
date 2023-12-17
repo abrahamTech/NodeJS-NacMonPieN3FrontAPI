@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 import { registerRequest, loginRequest } from "@/app/api/auth";
 
@@ -57,7 +58,16 @@ export const AuthProvider = ({ children }) => {
 
         return () => clearTimeout(timer);
       }
-    }, [errors])
+    }, [errors]);
+
+    useEffect(() => {
+      const cookies = Cookies.get();
+      console.log(cookies);
+
+      if(cookies.token) {
+        console.log(cookies.token);
+      }
+    }, []);
 
     return (
       <AuthContext.Provider value={{ signup, signin, user, isAuthenticated, errors }}>
