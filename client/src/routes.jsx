@@ -6,7 +6,13 @@ import { redirect } from "next/navigation";
 const ProtectedRoute = ({children}) => {
     const { user, loading,  isAuthenticated } = useAuth();
 
-    if(loading) return <h1>Loading...</h1>
+    if(loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <h1 className="text-4xl font-bold">Loading...</h1>
+            </div>
+        )
+    } 
     
     if(!isAuthenticated && !loading) {
         redirect("/login");

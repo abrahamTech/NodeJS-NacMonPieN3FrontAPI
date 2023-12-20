@@ -1,3 +1,4 @@
+import LoanForm from "@/components/LoanForm";
 import ProtectedRoute from "@/routes";
 
 export default function Loans() {
@@ -6,7 +7,7 @@ export default function Loans() {
         <ProtectedRoute >
             <div className="flex items-center justify-center h-screen">
                 <div>
-                    Loans Page
+                    Prestamos
                 </div>
             </div>
         </ProtectedRoute>
