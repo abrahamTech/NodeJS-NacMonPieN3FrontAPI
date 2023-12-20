@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/authContext'
+import { LoanProvider } from '@/context/loanContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className=''>
           <AuthProvider>
-            {children}
+            <LoanProvider>
+              {children}
+            </LoanProvider>
           </AuthProvider>
         </div>
       </body>
