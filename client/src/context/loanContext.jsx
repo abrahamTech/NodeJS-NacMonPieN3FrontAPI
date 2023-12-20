@@ -1,4 +1,6 @@
-const { createContext, useContext, useState } = require("react");
+"use client";
+
+import { createContext, useContext, useState } from "react";
 
 const LoanContext = createContext();
 
@@ -10,13 +12,15 @@ export const useLoans = () => {
     }
 
     return context;
-}
+};
 
 export const LoanProvider = ({ children }) => {
 
     const [loans, setLoans] = useState([]);
 
-    <LoanContext.Provider value={{loans,}}>
-        { children }
-    </LoanContext.Provider>
+    return (
+        <LoanContext.Provider value={{loans,}}>
+            { children }
+        </LoanContext.Provider>
+    )
 }
