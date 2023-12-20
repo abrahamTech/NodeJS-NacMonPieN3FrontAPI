@@ -4,9 +4,11 @@ import { useAuth } from "@/context/authContext";
 import { redirect } from "next/navigation";
 
 const ProtectedRoute = ({children}) => {
-    const { user, isAuthenticated } = useAuth();
+    const { user, loading,  isAuthenticated } = useAuth();
+
+    if(loading) return <h1>Loading...</h1>
     
-    if(!isAuthenticated) {
+    if(!isAuthenticated && !loading) {
         redirect("/login");
         return null;
     }
