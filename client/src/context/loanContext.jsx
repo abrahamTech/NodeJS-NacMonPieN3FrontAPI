@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { createLoanRequest } from "@/app/api/loans";
 
 const LoanContext = createContext();
 
@@ -19,7 +20,12 @@ export const LoanProvider = ({ children }) => {
     const [loans, setLoans] = useState([]);
 
     const createLoan = async (loan) => {
-        console.log("loan")
+        try {
+            const res = await createLoanRequest(loan);
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

@@ -8,10 +8,10 @@ function LoanForm() {
   const { register, handleSubmit } = useForm();
   const { loans, createLoan } = useLoans();
 
-  console.log(createLoan());
-
   const onSubmit = async (values) => {
-    console.log(values);
+    values.weight = parseFloat(values.weight);
+    //console.log(values);
+    createLoan(values);
   }
 
   return (
