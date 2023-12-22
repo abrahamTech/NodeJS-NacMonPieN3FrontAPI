@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { createLoanRequest } from "@/app/api/loans";
+import { createLoanRequest, getLoansRequest } from "@/app/api/loans";
 
 const LoanContext = createContext();
 
@@ -19,6 +19,16 @@ export const LoanProvider = ({ children }) => {
 
     const [loans, setLoans] = useState([]);
 
+    const getLoans = async () => {
+        try {
+            const res = await getLoansRequest();
+            console.log(res);
+            setLoans(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const createLoan = async (loan) => {
         try {
             const res = await createLoanRequest(loan);
@@ -29,7 +39,7 @@ export const LoanProvider = ({ children }) => {
     }
 
     return (
-        <LoanContext.Provider value={{loans, createLoan}}>
+        <LoanContext.Provider value={{loans, createLoan, getLoans}}>
             { children }
         </LoanContext.Provider>
     )
