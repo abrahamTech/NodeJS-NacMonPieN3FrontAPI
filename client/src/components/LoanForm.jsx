@@ -1,8 +1,14 @@
+"use client";
+
+import { useLoans } from "@/context/loanContext";
 import { useForm } from "react-hook-form"
 
 function LoanForm() {
 
   const { register, handleSubmit } = useForm();
+  const { loans, createLoan } = useLoans();
+
+  console.log(createLoan());
 
   const onSubmit = async (values) => {
     console.log(values);

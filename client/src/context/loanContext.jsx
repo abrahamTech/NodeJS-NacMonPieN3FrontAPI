@@ -18,8 +18,12 @@ export const LoanProvider = ({ children }) => {
 
     const [loans, setLoans] = useState([]);
 
+    const createLoan = async (loan) => {
+        console.log("loan")
+    }
+
     return (
-        <LoanContext.Provider value={{loans,}}>
+        <LoanContext.Provider value={{loans, createLoan}}>
             { children }
         </LoanContext.Provider>
     )
