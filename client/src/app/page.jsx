@@ -3,16 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import logo from '@/img/logoMonte.png';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (
-      <main className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-red-900 to-red-600'>
+      <main className='h-screen flex flex-col items-center justify-center '>
         <Image 
           src={logo}
           alt="Nacional Monte de Piedad Logo"
           width={600}
           className="mb-16 h-auto"
-        />
+          />
 
         <h1 className="text-4xl font-bold mb-4 text-white">Bienvenido</h1>
         <div className="flex justify-center">
