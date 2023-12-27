@@ -14,12 +14,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className='bg-gradient-to-b from-red-900 to-red-600'>
+      <body className={`${inter.className} `}>
+        <div className=''>
           <AuthProvider>
             <LoanProvider>
-              <Navbar />
-              {children}
+              <div className='bg-gradient-to-b from-red-900 to-red-600'>
+                <Navbar />
+                {children}
+              </div>
             </LoanProvider>
           </AuthProvider>
         </div>
