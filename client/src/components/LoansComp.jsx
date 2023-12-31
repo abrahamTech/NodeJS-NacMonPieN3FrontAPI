@@ -21,13 +21,14 @@ const LoansComp = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1>Prestamos</h1>
+            <h1 className="text-white">Prestamos</h1>
                 <div>
                     {
                         loans.map((loan) => (
                             <div key={loan._id}>
-                                <h1>{loan.idMaterial}</h1>
-                                <p>{loan.weight}</p>
+                                <h1 className="text-white">ID del Material: {loan.idMaterial}</h1>
+                                <p>Peso en Gramos: {loan.weight}</p>
+                                <p>Total del Prestamo: {loan.loanAmount}</p>
                             </div>
                         ))
                     }
