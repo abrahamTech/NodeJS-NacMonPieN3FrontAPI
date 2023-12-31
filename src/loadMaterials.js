@@ -1,4 +1,5 @@
 import Materials from "./models/materials.model.js";
+import { materialsSchema } from "./schemas/materials.schema.js";
 
 const materialsList = {
     '001': { nombre: 'Oro puro 24k', precioGramo: 1500.00 },
@@ -10,23 +11,55 @@ const materialsList = {
     '007': { nombre: 'Rodio', precioGramo: 100.00 }
 };
 
+const validateData = async (data) => {
+
+    const resultArray = [true, []];
+
+    data.map((material, index) => {
+        try {
+            materialsSchema.parse(material);
+        } catch (error) {
+            if (error.errors) {
+                //Indica que hay error
+                resultArray[0] = false;
+                // Agrega los mensajes de error al array
+                resultArray[1].push({index, message: error.errors.map(err => err.message)});
+            }
+        }
+    })
+
+    return resultArray;
+    
+}
+
 export const loadMaterialsList = async () => {
     try {
-        //Eliminar materiales existentes
-        await Materials.deleteMany({});
-
-        //Guardar los materiales
+        //Guardar los materiales en un array
         const materialsArray = Object.entries(materialsList)
-            .map(([codeMaterial, {nombre, precioGramo} ]) => ({
-                codeMaterial,
-                name: nombre,
-                pricePerGram: precioGramo,
-            }));
-        
-        await Materials.insertMany(materialsArray);
-        console.log("Materiales almacenados en la Base de Datos correctamente");
+        .map(([codeMaterial, {nombre, precioGramo} ]) => ({
+            codeMaterial,
+            name: nombre,
+            pricePerGram: precioGramo,
+        }));
+    
+        const valid = await validateData(materialsArray);
 
+        if(valid[0]) {
+            //Eliminar materiales existentes
+            await Materials.deleteMany({});
+            
+            //Guardar los materiales en la base de datoa
+            await Materials.insertMany(materialsArray);
+            console.log("Materiales almacenados en la Base de Datos correctamente");
+        } else {
+            console.log("La información que se intenta cargar a la base de datos es incorrecta, favor de validar")
+            valid[1].forEach((error) => {
+                const numMat = error.index + 1;
+                console.log(`Error en el material ${numMat}: ${error.message}`);
+            });
+        }
+        
     } catch (error) {
-        console.log("Error al guardar los materiales en la Base de Datos", error);
+        console.log("Error al guardar los materiales en la Base de Datos");
     }
 }
