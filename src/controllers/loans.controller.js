@@ -1,4 +1,5 @@
 import Loan from "../models/loan.model.js"
+import Materials from "../models/materials.model.js";
 
 export const getLoans = async (req, res) => {
     try {
@@ -25,12 +26,22 @@ export const getLoan = async (req, res) => {
 export const createLoan = async (req, res) => {
     try {
         const { idMaterial, weight, date } = req.body;
+        const material = await Materials.findOne({codeMaterial: idMaterial});
+
+        if(!material) {
+            return res.status(404).json({ message: "Material not found" });
+        }
+
+        const loanAmount = weight * material.pricePerGram;
+
         const newLoan = new Loan({
             idMaterial,
             weight,
+            loanAmount,
             date,
             user: req.user.id,
         });
+
         await newLoan.save();
         res.json(newLoan);
     } catch (error) {

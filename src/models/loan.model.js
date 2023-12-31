@@ -10,6 +10,10 @@ const loanSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    loanAmount: {
+      type: Number,
+      required: true,
+    },
     date: {
       type: Date,
       default: Date.now,
