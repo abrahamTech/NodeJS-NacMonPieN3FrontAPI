@@ -8,7 +8,7 @@ import Navbar from '@/components/Navbar';
 export default function Home() {
   return (
       // <main className='bg-indigo-400 flex flex-col items-center justify-center min-h-screen ' style={{ minHeight: 'calc(100vh + 100px)' }}>
-      <main className='h-screen flex flex-col items-center justify-center'>
+      <main className='flex flex-col items-center justify-center my-auto'>
 
         <Image 
           src={logo}

@@ -15,10 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} `}>
-        <div className=''>
+        <div className='bg-gradient-to-b from-red-900 to-red-600'>
           <AuthProvider>
             <LoanProvider>
-              <div className='bg-gradient-to-b from-red-900 to-red-600'>
+              <div className='container'>
                 <Navbar />
                 {children}
               </div>

@@ -21,9 +21,9 @@ const LoansComp = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-white">Prestamos</h1>
-                <div className="grid grid-cols-3 gap-2 w-2/3">
+        <div className="flex flex-col items-center justify-center">
+            <h1 className="text-white my-4">Prestamos</h1>
+                <div className="grid grid-cols-3 gap-2 w-4/5 mb-4">
                     {
                         loans.map((loan, index) => (
                             <LoanCard loan={loan} index={index} key={loan._id} />

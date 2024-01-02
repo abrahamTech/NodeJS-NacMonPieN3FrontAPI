@@ -8,7 +8,7 @@ const LoanId = ({ params }) => {
     console.log(params)
 
     return (
-        <div className="flex justify-center items-center h-screen flex-col">
+        <div className="flex flex-col justify-center items-center my-auto">
             <div>
                 Id Loan
                 <h1>ID - {params.id}</h1>

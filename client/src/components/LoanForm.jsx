@@ -15,10 +15,10 @@ function LoanForm() {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="materialId">ID del Material</label>
+          <label htmlFor="materialId" className="text-white">ID del Material</label>
           <input 
             type="text" 
             placeholder="002" 
@@ -29,10 +29,10 @@ function LoanForm() {
         </div>
 
         <div>
-          <label htmlFor="materialWeight">Peso en gramos</label>
+          <label htmlFor="materialWeight" className="text-white">Peso en gramos</label>
           <input 
             type="text" 
-            placeholder="50" 
+            placeholder="50"
             id="materialWeight"
             {...register("weight")}
           />
