@@ -21,7 +21,7 @@ const Navbar = () => {
                 {isAuthenticated ? (
                     <>
                         <li>
-                            Welcome {user.username}
+                            <h1 className="text-white mb-0">Welcome <span className="font-bold">{user.username}</span></h1>
                         </li>
 
                         <li>
@@ -37,7 +37,7 @@ const Navbar = () => {
                             <button 
                                 // href="/"
                                 onClick={() => logout()}
-                                className='bg-white text-red-900 px-6 py-3 rounded hover:bg-red-800/75 hover:text-white transition-all ease-in-out duration-500'
+                                className='border border-solid border-white text-white px-6 py-3 rounded hover:bg-red-800/75 hover:text-white transition-all ease-in-out duration-500'
                             >
                                 Logout
                             </button>

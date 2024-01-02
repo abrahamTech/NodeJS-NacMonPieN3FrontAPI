@@ -2,6 +2,7 @@
 
 import { useLoans } from "@/context/loanContext";
 import { useEffect } from "react";
+import LoanCard from "./LoanCard";
 
 const LoansComp = () => {
 
@@ -22,14 +23,10 @@ const LoansComp = () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-white">Prestamos</h1>
-                <div>
+                <div className="grid grid-cols-3 gap-2 w-2/3">
                     {
-                        loans.map((loan) => (
-                            <div key={loan._id}>
-                                <h1 className="text-white">ID del Material: {loan.idMaterial}</h1>
-                                <p>Peso en Gramos: {loan.weight}</p>
-                                <p>Total del Prestamo: {loan.loanAmount}</p>
-                            </div>
+                        loans.map((loan, index) => (
+                            <LoanCard loan={loan} index={index} key={loan._id} />
                         ))
                     }
                 </div>
