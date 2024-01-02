@@ -28,7 +28,7 @@ export default function SignInForm() {
 
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center">
             <div className="bg-white shadow-xl p-5 rounded-lg border-t-4 border-red-700">
                 
                 <h1 className="text-xl font-bold my-4">Register</h1>
