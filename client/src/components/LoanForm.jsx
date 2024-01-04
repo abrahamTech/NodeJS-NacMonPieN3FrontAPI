@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form"
 function LoanForm() {
 
   const { register, handleSubmit, setValue } = useForm();
-  const { loans, createLoan, getLoan } = useLoans();
+  const { loans, createLoan, getLoan, updateLoan } = useLoans();
   const params = useParams();
 
   useEffect(() => {
@@ -28,9 +28,24 @@ function LoanForm() {
   }, [])
 
   const onSubmit = async (values) => {
-    values.weight = parseFloat(values.weight);
-    //console.log(values);
-    createLoan(values);
+    try {
+      
+      if(params.id) {
+        //Editando
+        
+        values.weight = parseFloat(values.weight);
+        updateLoan(params.id, values);
+      } else {
+        //Creando
+        
+        values.weight = parseFloat(values.weight);
+        //console.log(values);
+        createLoan(values);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

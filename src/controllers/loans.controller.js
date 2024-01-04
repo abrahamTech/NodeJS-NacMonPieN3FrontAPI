@@ -65,9 +65,17 @@ export const deleteLoan = async (req, res) => {
 export const updateLoan = async (req, res) => {
     try {
         const { idMaterial, weight, date } = req.body;
+        const material = await Materials.findOne({codeMaterial: idMaterial});
+        
+        if(!material) {
+            return res.status(404).json({ message: "Material not found" });
+        }
+
+        const loanAmount = weight * material.pricePerGram;
+
         const loanUpdated = await Loan.findOneAndUpdate(
           { _id: req.params.id },
-          { idMaterial, weight, date },
+          { idMaterial, weight, loanAmount, date },
           { new: true }
         );
         return res.json(loanUpdated);
