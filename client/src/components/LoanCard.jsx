@@ -7,8 +7,8 @@ const LoanCard = ({ loan, index }) => {
     const {deleteLoan} = useLoans();
 
     return (
-        <div className="flex flex-col gap-y-2 bg-zinc-800 max-w-md min-w-[320px] w-full p-6 rounded-md">
-            <header className="flex justify-between gap-2">
+        <div className="flex flex-col gap-y-4 bg-zinc-800 w-full p-6 rounded-md min-w-[120px] max-w-[180px] md:min-w-[180px] sm:min-w-sm sm:max-w-md">
+            <header className="flex flex-col justify-between gap-2 xl:flex-row">
                 <p className="text-white text-2xl">Prestamo No. {index + 1}</p>
                 <div className="flex items-center gap-x-2">
                     {/* <button>Editar</button> */}

@@ -7,14 +7,24 @@ import { useForm } from "react-hook-form"
 
 function LoanForm() {
 
-  const { register, handleSubmit } = useForm();
-  const { loans, createLoan } = useLoans();
+  const { register, handleSubmit, setValue } = useForm();
+  const { loans, createLoan, getLoan } = useLoans();
   const params = useParams();
 
   useEffect(() => {
-    if(params.id) {
-      console.log(params)
+
+    const loadLoan = async () => {
+
+      if(params.id) {
+        // console.log(params)
+        const loan = await getLoan(params.id);
+        console.log(loan);
+        setValue("idMaterial", loan.idMaterial);
+        setValue("weight", loan.weight);
+      }
     }
+
+    loadLoan();
   }, [])
 
   const onSubmit = async (values) => {
