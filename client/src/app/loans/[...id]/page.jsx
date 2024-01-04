@@ -10,8 +10,7 @@ const LoanId = ({ params }) => {
     return (
         <div className="flex flex-col justify-center items-center my-auto">
             <div>
-                Id Loan
-                <h1>ID - {params.id}</h1>
+                <h1 className='text-red-900'>ID del prestamo - {params.id}</h1>
             </div>
             <LoanForm />
         </div>

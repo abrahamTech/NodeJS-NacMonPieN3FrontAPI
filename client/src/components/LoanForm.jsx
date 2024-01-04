@@ -1,12 +1,21 @@
 "use client";
 
 import { useLoans } from "@/context/loanContext";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 
 function LoanForm() {
 
   const { register, handleSubmit } = useForm();
   const { loans, createLoan } = useLoans();
+  const params = useParams();
+
+  useEffect(() => {
+    if(params.id) {
+      console.log(params)
+    }
+  }, [])
 
   const onSubmit = async (values) => {
     values.weight = parseFloat(values.weight);
