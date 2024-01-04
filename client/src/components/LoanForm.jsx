@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoans } from "@/context/loanContext";
-import { useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form"
 
@@ -10,6 +10,7 @@ function LoanForm() {
   const { register, handleSubmit, setValue } = useForm();
   const { loans, createLoan, getLoan, updateLoan } = useLoans();
   const params = useParams();
+  const router = useRouter();
 
   useEffect(() => {
 
@@ -43,6 +44,7 @@ function LoanForm() {
         createLoan(values);
       }
 
+      router.push("/loans");
     } catch (error) {
       console.log(error);
     }
