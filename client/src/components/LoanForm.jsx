@@ -3,7 +3,11 @@
 import { useLoans } from "@/context/loanContext";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 function LoanForm() {
 
@@ -22,6 +26,7 @@ function LoanForm() {
         console.log(loan);
         setValue("idMaterial", loan.idMaterial);
         setValue("weight", loan.weight);
+        setValue("date", dayjs(loan.date).utc().format("YYYY-MM-DD"));
       }
     }
 
@@ -30,18 +35,26 @@ function LoanForm() {
 
   const onSubmit = async (values) => {
     try {
+      values.weight = parseFloat(values.weight);
+
+      const valuesValid = {
+        ...values,
+        date: values.date ? dayjs.utc(values.date).format() : dayjs.utc().format(), 
+      }
       
       if(params.id) {
         //Editando
         
-        values.weight = parseFloat(values.weight);
-        updateLoan(params.id, values);
+        // values.weight = parseFloat(values.weight);
+        // updateLoan(params.id, values);
+        updateLoan(params.id, valuesValid);
       } else {
         //Creando
         
-        values.weight = parseFloat(values.weight);
+        // values.weight = parseFloat(values.weight);
         //console.log(values);
-        createLoan(values);
+        // createLoan(values);
+        createLoan(valuesValid);
       }
 
       router.push("/loans");
@@ -71,6 +84,15 @@ function LoanForm() {
             placeholder="50"
             id="materialWeight"
             {...register("weight")}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="visitShop" className="text-white">Fecha Cita Sucursal</label>
+          <input 
+            type="date" 
+            id="visitShop"
+            {...register("date")}
           />
         </div>
 

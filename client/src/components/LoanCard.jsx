@@ -1,4 +1,7 @@
 import Link from "next/link";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 import { useLoans } from "@/context/loanContext";
 
@@ -29,7 +32,8 @@ const LoanCard = ({ loan, index }) => {
                 <p className="text-white">ID del Material: {loan.idMaterial}</p>
                 <p className="text-xl">Peso en Gramos: {loan.weight}</p>
                 <p className="text-xl font-bold">Total del Prestamo: <span className="text-red-700">${loan.loanAmount}</span></p>                  
-                <p>{new Date(loan.date).toLocaleDateString()}</p>
+                {/* <p>{new Date(loan.date).toLocaleDateString()}</p> */}
+                <p>{dayjs(loan.date).utc().format("DD/MM/YYYY")}</p>
             </div>
         </div>
     )
