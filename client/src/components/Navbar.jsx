@@ -10,8 +10,8 @@ const Navbar = () => {
     return (
         // <nav className="bg-zinc-700 flex justify-between py-5 px-10 rounded-b-xl">
         // <nav className="fixed top-0 z-[40] w-full h-[100px] bg-transparent flex justify-between items-center px-10 md:px-20 rounded-b-xl">
-        <nav className="bg-transparent h-[100px] flex items-center justify-between rounded-b-xl px-4">
-            <Link href="/" className="text-white inline-block text-[25px] font-semibold">
+        <nav className="bg-transparent h-[100px] gap-3 flex flex-col sm:flex-row items-center justify-between rounded-b-xl px-4">
+            <Link href="/" className="mt-2 sm:mt-0 text-xl text-white inline-block text-[25px] font-semibold sm:text-3xl">
                 Administrador de 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
                     &nbsp;Prestamos
@@ -22,7 +22,7 @@ const Navbar = () => {
                 {isAuthenticated ? (
                     <>
                         <li>
-                            <h1 className="text-white mb-0">Welcome <span className="font-bold">{user.username}</span></h1>
+                            <h1 className="text-lg text-white mb-0 font-light sm:text-xl">Welcome <span className="font-bold">{user.username}</span></h1>
                         </li>
 
                         <li>
