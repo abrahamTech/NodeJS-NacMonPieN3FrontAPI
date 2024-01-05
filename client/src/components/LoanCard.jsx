@@ -30,10 +30,11 @@ const LoanCard = ({ loan, index }) => {
             </header>
             <div>
                 <p className="text-white">ID del Material: {loan.idMaterial}</p>
-                <p className="text-xl">Peso en Gramos: {loan.weight}</p>
-                <p className="text-xl font-bold">Total del Prestamo: <span className="text-red-700">${loan.loanAmount}</span></p>                  
+                <p className="text-white">Peso en Gramos: {loan.weight}</p>
+                <p className="text-zinc-400 mt-5 mb-2text-xl font-bold">Total del Prestamo: <span className="text-red-700">${loan.loanAmount}</span></p>                  
                 {/* <p>{new Date(loan.date).toLocaleDateString()}</p> */}
-                <p>{dayjs(loan.date).utc().format("DD/MM/YYYY")}</p>
+                <p className="text-sm text-white">Cita en Sucursal: <span className="font-bold">{dayjs(loan.date).utc().format("DD/MM/YYYY")}</span></p>
+                <p className="text-xs text-gray-500">Creada el  {new Date(loan.createdAt).toLocaleDateString()}</p>
             </div>
         </div>
     )
